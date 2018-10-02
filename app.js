@@ -65,6 +65,17 @@ function arrowInput(event) {
 
 // ------ DO NOT CHANGE ANY CODE ABOVE ------------------------
 
+/******** Task #1 ********/
+// Create food
+function createFood() {
+   // Check collision
+   food = {
+    x: Math.floor(Math.random() * width),
+    y: Math.floor(Math.random() * height)
+ };
+}
+
+/******** Task #2 ********/
 function createSnake() {
    // Initiate snake
    snake = [];
@@ -75,19 +86,11 @@ function createSnake() {
    };
 }
 
-// Create food
-function createFood() {
-   // Check collision
-   food = {
-    x: Math.floor(Math.random() * width),
-    y: Math.floor(Math.random() * height)
- };
-}
-
 // Draw scene
 function render() {
    // Add your code here!
 
+   /******** Task #3 ********/
     // Create a new coordinate called newHead, making it's x and y equal to current head coordinates.
     var newHead = {
         x: snake[0].x,
