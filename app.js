@@ -117,7 +117,18 @@ function render() {
         snake.pop();
     }
 
-    snake.unshift(newHead);
+    if (
+        newHead.y > height -1 ||
+        newHead.y < 0 ||
+        newHead.x > width -1 ||
+        newHead.x < 0
+        // collision(newHead, snake)
+     ) {
+        setupNewGame();
+     } else {
+        snake.unshift(newHead);
+     }
+    // Place newHead into the front of the snake array.
     
     refreshCanvas();
 }
