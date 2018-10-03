@@ -9,10 +9,7 @@ var snake; // The list of coordinates of the snake.
 
 var interval = 300; // Time in milliseconds between each render() loop.
 
-/* Select HTML element
-* cvs - standard shorthand for canvas
-* ctx - standard shorthand for context
-*/
+// Canvas Setup
 var cvs = document.getElementById('canvas');
 var ctx = cvs.getContext('2d');
 var box = 30; // Pixel equivalent of one width/height unit in the canvas
@@ -53,12 +50,13 @@ function arrowInput(event) {
 	}
 }
 
-// ------ DO NOT CHANGE ANY CODE ABOVE ------------------------
+
+
+// **************  DO NOT CHANGE ANY CODE ABOVE **************
 
 /******** Task #1.1 ********/
 // Create food
 function createFood() {
-	// Check collision
 	food = {
 		x: Math.floor(Math.random() * width),
 		y: Math.floor(Math.random() * height)
@@ -72,13 +70,10 @@ function createFood() {
 
 /******** Task #1.2 ********/
 function createSnake() {
-	// Initiate snake
-	snake = [];
-	// Initiate snake
-	snake[0] = {
-		x: 1,
-		y: 1
-	};
+	// Initiate the snake and give it its first and starting coordinate.
+	snake = [
+        {x: 1, y: 1}
+    ];
 }
 
 // Draw scene
@@ -121,7 +116,7 @@ function render() {
     }
 
     /******** Task #2.2 ********/
-    // if the snake eats the food
+    // if the snake eats food
     if (newHead.x == food.x && newHead.y == food.y) {
         createFood();
         // don't want to remove tail if the snake eats food
@@ -164,7 +159,7 @@ function collision(coordinate) {
 } 
  
 
-// ------ DO NOT CHANGE ANY CODE BELOW ------------------------
+// ************** DO NOT CHANGE ANY CODE BELOW **************
 
 // CAll draw function every 300 ms
 var drawLoop = setInterval(render, interval);
