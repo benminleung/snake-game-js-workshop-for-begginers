@@ -4,6 +4,10 @@
 var width = 10;
 var height = 10;
 
+// The keyboard input of the user.
+// TYPE: a String
+var input; // Is one of the follows: "up", "down", "left", "right".
+
 // The direction that the snake is moving.
 // TYPE: a String
 var direction; // Is one of the follows: "up", "down", "left", "right".
@@ -53,29 +57,34 @@ document.addEventListener('keydown', arrowInput);
 
 function arrowInput(event) {
 	if (event.keyCode === 37) {
-		direction = 'left';
+		input = 'left';
 	} else if (event.keyCode === 38) {
-		direction = 'up';
+		input = 'up';
 	} else if (event.keyCode === 39) {
-		direction = 'right';
+		input = 'right';
 	} else if (event.keyCode === 40) {
-		direction = 'down';
+		input = 'down';
 	}
 }
 
 // ------ DO NOT CHANGE ANY CODE ABOVE ------------------------
 
-/******** Task #1 ********/
+/******** Task #1.1 ********/
 // Create food
 function createFood() {
 	// Check collision
 	food = {
 		x: Math.floor(Math.random() * width),
 		y: Math.floor(Math.random() * height)
-	};
+    };
+    /******** Task #4.1 ********/
+    // Check collision between new food coordinate and snake coordinates.
+    if (collision(food, snake) === true){
+        createFood();
+    }
 }
 
-/******** Task #2 ********/
+/******** Task #1.2 ********/
 function createSnake() {
 	// Initiate snake
 	snake = [];
@@ -90,14 +99,28 @@ function createSnake() {
 function render() {
    // Add your code here!
 
-	/******** Task #3 ********/
+	/******** Task #2.1 ********/
     // Create a new coordinate called newHead, making it's x and y equal to current head coordinates.
     var newHead = {
         x: snake[0].x,
         y: snake[0].y
     }
 
-    //calculates newHead coordinates according to direction
+    /******** Task #4.2 ********/
+    // Set direction equal to input ONLY if input is legal.
+    if (
+        (input == "right" && direction != "left") ||
+        (input == "left" && direction != "right") ||
+        (input == "up" && direction != "down") ||
+        (input == "down" && direction != "up")
+    ){
+        /******** Task #2.1 ********/
+        // Set direction equal to input
+        direction = input;
+    }
+
+    /******** Task #2.1 ********/
+    //determines direction and calculates newHead coordinates according to direction
     if (direction == "right") {
         newHead.x++;
     }
@@ -110,7 +133,8 @@ function render() {
     if (direction == "down") {
         newHead.y++;
     }
-     
+
+    /******** Task #2.2 ********/
     // if the snake eats the food
     if (newHead.x == food.x && newHead.y == food.y) {
         createFood();
@@ -120,30 +144,49 @@ function render() {
         snake.pop();
     }
 
+    /******** Task #3 ********/
+    // Restart the game if nextHead is in a coordinate that would end the game.
     if (
+        /******** Task #3.1 ********/
         newHead.y > height -1 ||
         newHead.y < 0 ||
         newHead.x > width -1 ||
-        newHead.x < 0
-        // collision(newHead, snake)
-     ) {
+        newHead.x < 0 ||
+        /******** Task #3.2 ********/
+        collision(newHead, snake)
+    ) {
         setupNewGame();
-     } else {
+    } else {
+        /******** Task #2.1 ********/
+        // snake moves by placing newHead into the front position of snake.
         snake.unshift(newHead);
-     }
-    // Place newHead into the front of the snake array.
+    }
     
+    // Updates the canvas. This should be the last line in the render() function.
     refreshCanvas();
 }
 
+/******** Task #3.2 ********/
+// Check collision between 
+function collision(coordinate, snake) {
+    for (var i = 0; i < snake.length; i++) {
+       if (coordinate.x === snake[i].x && coordinate.y === snake[i].y) {
+          return true;
+       }
+    }
+    return false;
+} 
+ 
+
 // ------ DO NOT CHANGE ANY CODE BELOW ------------------------
 
-// CAll draw function every 200 ms
-var drawLoop = setInterval(render, 200);
+// CAll draw function every 300 ms
+var drawLoop = setInterval(render, 300);
 
 // Setup game objects to initial values
 function setupNewGame() {
-	direction = 'right';
+    direction = 'right';
+    input = 'right';
 	createSnake();
 	createFood();
 	refreshCanvas();
