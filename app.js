@@ -1,24 +1,13 @@
-// Variable needed for game
+var width = 10; // width of canvas
+var height = 10; // height of canvas
 
-// Height and width of our canvas
-var width = 10;
-var height = 10;
+var input; // The arrow key input of the user.
+var direction; // The direction that the snake is moving.
 
-// The keyboard input of the user.
-// TYPE: a String
-var input; // Is one of the follows: "up", "down", "left", "right".
+var food; // The coordinate of the food.
+var snake; // The list of coordinates of the snake.
 
-// The direction that the snake is moving.
-// TYPE: a String
-var direction; // Is one of the follows: "up", "down", "left", "right".
-
-// The coordinates that the food occupies.
-// TYPE: a coordinate object.
-var food; //e.g. Object { x: 1 , y:3 }
-
-// The coordinates that the snake body occupies.
-// TYPE: an array (list) of coordinate objects.
-var snake; //e.g. Array of objects [ { x: 1 , y: 2 }, { x: 1 , y: 3 } ]
+var interval = 300; // Time in milliseconds between each render() loop.
 
 /* Select HTML element
 * cvs - standard shorthand for canvas
@@ -39,10 +28,8 @@ foodImg.src =
 function refreshCanvas() {
 	// Clear the canvas
 	ctx.clearRect(0, 0, cvs.width, cvs.height);
-
 	// Draw food
 	ctx.drawImage(foodImg, food.x * box, food.y * box, box, box);
-
 	// Draw snake
 	for (let i = snake.length - 1; i >= 0; i--) {
 		ctx.fillStyle = i === 0 ? 'green' : '#EB8921';
@@ -54,7 +41,6 @@ function refreshCanvas() {
 
 // Records input direction
 document.addEventListener('keydown', arrowInput);
-
 function arrowInput(event) {
 	if (event.keyCode === 37) {
 		input = 'left';
@@ -79,7 +65,7 @@ function createFood() {
     };
     /******** Task #4.1 ********/
     // Check collision between new food coordinate and snake coordinates.
-    if (collision(food, snake) === true){
+    if (collision(food) === true){
         createFood();
     }
 }
@@ -153,7 +139,7 @@ function render() {
         newHead.x > width -1 ||
         newHead.x < 0 ||
         /******** Task #3.2 ********/
-        collision(newHead, snake)
+        collision(newHead)
     ) {
         setupNewGame();
     } else {
@@ -168,7 +154,7 @@ function render() {
 
 /******** Task #3.2 ********/
 // Check collision between 
-function collision(coordinate, snake) {
+function collision(coordinate) {
     for (var i = 0; i < snake.length; i++) {
        if (coordinate.x === snake[i].x && coordinate.y === snake[i].y) {
           return true;
@@ -181,7 +167,7 @@ function collision(coordinate, snake) {
 // ------ DO NOT CHANGE ANY CODE BELOW ------------------------
 
 // CAll draw function every 300 ms
-var drawLoop = setInterval(render, 300);
+var drawLoop = setInterval(render, interval);
 
 // Setup game objects to initial values
 function setupNewGame() {
