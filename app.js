@@ -116,38 +116,20 @@ function render() {
 
     /******** Task #3 ********/
     // Restart the game if nextHead is in a coordinate that would end the game.
-    if (
-        /******** Task #3.1 ********/
-        // End game if statement
-        newHead.y > height -1 ||
-        newHead.y < 0 ||
-        newHead.x > width -1 ||
-        newHead.x < 0 ||
-        /******** Task #3.2 ********/
-        collision(newHead)
-    ) {
-        setupNewGame();
-    } else {
-        /******** Task #2.1 ********/
-        // snake moves by placing newHead into the front position of snake.
-        snake.unshift(newHead);
-    }
+
+    
+    /******** Task #2.1 ********/
+    // snake moves by placing newHead into the front position of snake.
+    snake.unshift(newHead);
+
     
     // Updates the canvas. This should be the last line in the render() function.
     refreshCanvas();
 }
 
 /******** Task #3.2 ********/
-// Check collision between 
-function collision(coordinate) {
-    for (var i = 0; i < snake.length; i++) {
-       if (coordinate.x === snake[i].x && coordinate.y === snake[i].y) {
-          return true;
-       }
-    }
-    return false;
-} 
- 
+// Check collision
+
 
 // ************** DO NOT CHANGE ANY CODE BELOW **************
 
