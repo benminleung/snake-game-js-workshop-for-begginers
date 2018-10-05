@@ -53,21 +53,19 @@ function arrowInput(event) {
 
 // **************  DO NOT CHANGE ANY CODE ABOVE **************
 
-
+/******** Task #1.1 ********/
+// Create food
 function createFood() {
-    /******** Task #1.1 ********/
-    // Create food
 	food = {
 		x: Math.floor(Math.random() * width),
 		y: Math.floor(Math.random() * height)
     };
-    
     /******** Task #4.1 ********/
     // Check collision between new food coordinate and snake coordinates.
+    if (collision(food) === true){
+        createFood();
+    }
 }
-
-
-
 
 /******** Task #1.2 ********/
 function createSnake() {
@@ -90,12 +88,16 @@ function render() {
 
     /******** Task #4.2 ********/
     // Set direction equal to input ONLY if input is legal.
-
-
-    /******** Task #2.1 ********/
-    // Set direction equal to input
-    direction = input;
-
+    if (
+        (input == "right" && direction != "left") ||
+        (input == "left" && direction != "right") ||
+        (input == "up" && direction != "down") ||
+        (input == "down" && direction != "up")
+    ){
+        /******** Task #2.1 ********/
+        // Set direction equal to input
+        direction = input;
+    }
 
     /******** Task #2.1 ********/
     //determines direction and calculates newHead coordinates according to direction
