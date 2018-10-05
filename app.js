@@ -53,19 +53,21 @@ function arrowInput(event) {
 
 // **************  DO NOT CHANGE ANY CODE ABOVE **************
 
-/******** Task #1.1 ********/
-// Create food
+
 function createFood() {
+    /******** Task #1.1 ********/
+    // Create food
 	food = {
 		x: Math.floor(Math.random() * width),
 		y: Math.floor(Math.random() * height)
     };
+    
     /******** Task #4.1 ********/
     // Check collision between new food coordinate and snake coordinates.
-    if (collision(food) === true){
-        createFood();
-    }
 }
+
+
+
 
 /******** Task #1.2 ********/
 function createSnake() {
@@ -88,16 +90,12 @@ function render() {
 
     /******** Task #4.2 ********/
     // Set direction equal to input ONLY if input is legal.
-    if (
-        (input == "right" && direction != "left") ||
-        (input == "left" && direction != "right") ||
-        (input == "up" && direction != "down") ||
-        (input == "down" && direction != "up")
-    ){
-        /******** Task #2.1 ********/
-        // Set direction equal to input
-        direction = input;
-    }
+
+
+    /******** Task #2.1 ********/
+    // Set direction equal to input
+    direction = input;
+
 
     /******** Task #2.1 ********/
     //determines direction and calculates newHead coordinates according to direction
@@ -115,12 +113,10 @@ function render() {
     }
 
     /******** Task #2.2 ********/
-    // if the snake eats food
+    // if the snake eats food, spawn new food, else, remove tail.
     if (newHead.x == food.x && newHead.y == food.y) {
         createFood();
-        // don't want to remove tail if the snake eats food
     } else {
-        // Remove the tail
         snake.pop();
     }
 
@@ -128,6 +124,7 @@ function render() {
     // Restart the game if nextHead is in a coordinate that would end the game.
     if (
         /******** Task #3.1 ********/
+        // End game if statement
         newHead.y > height -1 ||
         newHead.y < 0 ||
         newHead.x > width -1 ||
