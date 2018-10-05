@@ -77,10 +77,7 @@ function render() {
 
 	/******** Task #2.1 ********/
     // Create a new coordinate called newHead, making it's x and y equal to current head coordinates.
-    var newHead = {
-        x: snake[0].x,
-        y: snake[0].y
-    }
+
 
     /******** Task #4.2 ********/
     // Set direction equal to input ONLY if input is legal.
@@ -88,31 +85,15 @@ function render() {
 
     /******** Task #2.1 ********/
     // Set direction equal to input
-    direction = input;
 
 
     /******** Task #2.1 ********/
     //determines direction and calculates newHead coordinates according to direction
-    if (direction == "right") {
-        newHead.x++;
-    }
-    if (direction == "left") {
-        newHead.x--;
-    }
-    if (direction == "up") {
-        newHead.y--;
-    }
-    if (direction == "down") {
-        newHead.y++;
-    }
+
 
     /******** Task #2.2 ********/
     // if the snake eats food, spawn new food, else, remove tail.
-    if (newHead.x == food.x && newHead.y == food.y) {
-        createFood();
-    } else {
-        snake.pop();
-    }
+
 
     /******** Task #3 ********/
     // Restart the game if nextHead is in a coordinate that would end the game.
@@ -120,7 +101,6 @@ function render() {
     
     /******** Task #2.1 ********/
     // snake moves by placing newHead into the front position of snake.
-    snake.unshift(newHead);
 
     
     // Updates the canvas. This should be the last line in the render() function.
