@@ -56,10 +56,7 @@ function arrowInput(event) {
 function createFood() {
     /******** Task #1.1 ********/
     // Create food
-	food = {
-		x: Math.floor(Math.random() * width),
-		y: Math.floor(Math.random() * height)
-    };
+    
     
     /******** Task #4.1 ********/
     // Check collision between new food coordinate and snake coordinates.
@@ -67,10 +64,8 @@ function createFood() {
 
 /******** Task #1.2 ********/
 function createSnake() {
-	// Initiate the snake and give it its first and starting coordinate.
-	snake = [
-        {x: 1, y: 1}
-    ];
+    // Initiate the snake and give it its first and starting coordinate.
+    
 }
 
 function render() {
