@@ -75,9 +75,7 @@ function createSnake() {
     ];
 }
 
-// Draw scene
 function render() {
-   // Add your code here!
 
 	/******** Task #2.1 ********/
     // Create a new coordinate called newHead, making it's x and y equal to current head coordinates.
