@@ -53,9 +53,9 @@ function arrowInput(event) {
 
 // **************  DO NOT CHANGE ANY CODE ABOVE **************
 
-/******** Task #1.1 ********/
-// Create food
 function createFood() {
+    /******** Task #1.1 ********/
+    // Create food
 	food = {
 		x: Math.floor(Math.random() * width),
 		y: Math.floor(Math.random() * height)
