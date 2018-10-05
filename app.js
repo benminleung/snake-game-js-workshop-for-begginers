@@ -138,7 +138,7 @@ function render() {
 }
 
 /******** Task #3.2 ********/
-// Check collision between 
+// Check collision 
 function collision(coordinate) {
     for (var i = 0; i < snake.length; i++) {
        if (coordinate.x === snake[i].x && coordinate.y === snake[i].y) {
